@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>pt.ist</groupId>
+        <artifactId>ist-dsi-project</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>bank-long-tx</artifactId>
+    <version>2.2.0-SNAPSHOT</version>
+
+    <name>Bank with Long Transactions</name>
+
+    <properties>
+        <code.generator.class>pt.ist.fenixframework.backend.jvstm.JVSTMCodeGenerator</code.generator.class>
+        <version.fenixframework>2.2.0-SNAPSHOT</version.fenixframework>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>pt.ist</groupId>
+                <artifactId>ff-maven-plugin</artifactId>
+                <version>${version.fenixframework}</version>
+                <configuration>
+                    <codeGeneratorClassName>${code.generator.class}</codeGeneratorClassName>
+                    <params>
+                        <collectionClassName>pt.ist.fenixframework.adt.bplustree.DomainBPlusTree</collectionClassName>
+                    </params>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>ff-test-generate-domain</goal>
+                            <goal>ff-test-post-compile</goal>
+                            <goal>ff-test-process-atomic-annotations</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>pt.ist</groupId>
+                        <artifactId>fenix-framework-backend-jvstm-common-code-generator</artifactId>
+                        <version>${version.fenixframework}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>pt.ist</groupId>
+            <artifactId>fenix-framework-backend-jvstm-common-runtime</artifactId>
+            <version>${version.fenixframework}</version>
+        </dependency>
+        <dependency>
+            <groupId>pt.ist</groupId>
+            <artifactId>fenix-framework-core-long-tx-api</artifactId>
+            <version>${version.fenixframework}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>fenix-ashes-maven-repository</id>
+            <url>https://fenix-ashes.ist.utl.pt/nexus/content/groups/fenix-ashes-maven-repository</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>fenix-ashes-maven-repository</id>
+            <url>https://fenix-ashes.ist.utl.pt/nexus/content/groups/fenix-ashes-maven-repository</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
